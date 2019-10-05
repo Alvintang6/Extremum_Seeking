@@ -10,6 +10,7 @@ fs = 5
 phase = 0
 omega = 5*2*math.pi
 dt =0.02
+K = 5
 n = [2 * math.pi * fs * t / N for t in range(N)]
 x = [math.sin(i) for i in n]
 x1 = [math.sin(i*10) for i in n]
@@ -48,6 +49,9 @@ for i in range(len(xx)):
     HPFhis[filterorder] = HPFnew
     t_now = t_now+dt
     dr =  HPFnew*math.sin(omega*t_now+phase)
+    R = R + dr*dt*K
+    Rd = R + math.sin(omega*t_now+phase)
+
 
 sf = signal.filtfilt(b, a, xx)
 plt.subplot(2,1,1)
